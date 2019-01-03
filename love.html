@@ -11,84 +11,271 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="css/iphonex.css" type="text/css" rel="stylesheet">
-
 <script>
-(function (doc, win) {
-      var docEl = doc.documentElement;
-      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
-      recalc = function () {
-        var clientWidth = docEl.clientWidth;
-        if (!clientWidth) return;
-        docEl.style.fontSize = 16 * (clientWidth / 375) + 'px';
-      };
-      if (!doc.addEventListener) return;
-      win.addEventListener(resizeEvt, recalc, false);
-      doc.addEventListener('DOMContentLoaded', recalc, false);
-    }(document,window));
+  /*--禁用微信分享按钮--*/
+  function onBridgeReady() { WeixinJSBridge.call('hideOptionMenu'); }
+  if (typeof WeixinJSBridge == "undefined") {
+    if (document.addEventListener) {
+      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    } else if (document.attachEvent) {
+      document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+      document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+  } else {
+    onBridgeReady();
+  }
+  window.addEventListener('orientationchange', function (event) {
+    // 180 或 0 是竖屏
+    if (window.orientation == 90 || window.orientation == -90) {
+      document.body.innerHTML = "";
+      alert("为了您的更好体验，请设置竖屏，重新体验～");
+    }
+  });
+  if (window.orientation == 90 || window.orientation == -90) {
+    document.body.innerHTML = "";
+    alert("为了您的更好体验，请设置竖屏，重新体验～");
+  }
 </script>
+<script>
+  /*--rem兼容方案-不可与另一个通用-*/
+  (function (doc, win) {
+    var docEl = doc.documentElement;
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 16 * (clientWidth / 375) + 'px';
+    };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+  }(document, window));
+</script>
+<script src="json/udata.js"></script>
   <link href="css/receive.css" rel="stylesheet"></head>
-  <body style="background: #ffffff;">
-    <div data-v-1d1d5e89="" class="containerBox">
-      <div data-v-1d1d5e89="" class="containerCont">
-        <div data-v-1d1d5e89="" class="jdjrLogo"></div>
-        <div data-v-1d1d5e89="" class="receiveRedPacketBox">
-          <img data-v-1d1d5e89="" src="img/redPacket.png" class="receiveRedPacketBj">
-          <div data-v-1d1d5e89="" class="nicPic">
-            <img data-v-1d1d5e89="" src="img/ceaaced2cbf9d3c35639363031353335333732313834393431_big.jpg">
+  <body>
+    <div class="containerBox">
+      <div class="containerCont">
+
+        <div class="receiveRedPacketBox sclBox1">
+          <img src="img/redPacket.png" class="receiveRedPacketBj">
+          <div class="nicPic">
+            <img src="img/ceaaced2cbf9d3c35639363031353335333732313834393431_big.jpg">
           </div>
-          <p data-v-1d1d5e89="" class="title">恭喜发财，大吉大利</p>
-          <div data-v-1d1d5e89="" clstag="pageclick|keycount|hb100g_2018|kaihongbao_c" class="openBtn">開</div>
-          <div data-v-1d1d5e89="" class="alreadyReceive">
-            <div data-v-1d1d5e89="" class="lineLeft"></div>
-            <p data-v-1d1d5e89="" class="personMsgBox">今日已有&nbsp;
-              <span data-v-1d1d5e89="" class="personNumber">211210</span>&nbsp;人领取了现金</p>
-            <div data-v-1d1d5e89="" class="lineRight"></div>
+          <p class="title">恭喜发财，大吉大利</p>
+          <div class="openBtn">開</div>
+          <div class="alreadyReceive">
+            <div class="lineLeft"></div>
+            <p class="personMsgBox">今日已有&nbsp;
+              <span class="personNumber">211210</span>&nbsp;人领取了现金</p>
+            <div class="lineRight"></div>
           </div>
-          <div data-v-1d1d5e89="" class="redDetailList">
-            <ul data-v-1d1d5e89="">
-              <li data-v-1d1d5e89="">
-                <div data-v-1d1d5e89="" class="nicPicSmall">
-                  <img data-v-1d1d5e89="" src="img/59094c24Na713e8f2.png">
-                </div>
-                <div data-v-1d1d5e89="" class="nicName">j***8</div>
-                <div data-v-1d1d5e89="" class="money">+ 7.4&nbsp;
-                  <span data-v-1d1d5e89="" class="desc">元</span>
-                </div>
-              </li>
-              <li data-v-1d1d5e89="">
-                <div data-v-1d1d5e89="" class="nicPicSmall">
-                  <img data-v-1d1d5e89="" src="img/59094c24Na713e8f2.png">
-                </div>
-                <div data-v-1d1d5e89="" class="nicName">j***b</div>
-                <div data-v-1d1d5e89="" class="money">+ 12.09&nbsp;
-                  <span data-v-1d1d5e89="" class="desc">元</span>
-                </div>
-              </li>
-              <li data-v-1d1d5e89="">
-                <div data-v-1d1d5e89="" class="nicPicSmall">
-                  <img data-v-1d1d5e89="" src="img/59094c24Na713e8f2.png">
-                </div>
-                <div data-v-1d1d5e89="" class="nicName">想***鸟</div>
-                <div data-v-1d1d5e89="" class="money">+ 5.06&nbsp;
-                  <span data-v-1d1d5e89="" class="desc">元</span>
-                </div>
-              </li>
-              <li data-v-1d1d5e89="">
-                <div data-v-1d1d5e89="" class="nicPicSmall">
-                  <img data-v-1d1d5e89="" src="img/59094c24Na713e8f2.png">
-                </div>
-                <div data-v-1d1d5e89="" class="nicName">y***b</div>
-                <div data-v-1d1d5e89="" class="money">+ 10.06&nbsp;
-                  <span data-v-1d1d5e89="" class="desc">元</span>
-                </div>
-              </li>
-            </ul>
+          <div id="scrollDiv" class="redDetailList">
+
+            <div class="scrli">
+              <img class="atimg" src="" alt="">
+              <div class="snames">
+                <p class="nm"></p>
+                <p class="tm"></p>
+              </div>
+              <div class="spays">提现&nbsp;
+                <span class="py"></span>
+              </div>
+            </div>
+
+            <div class="scrli">
+              <img class="atimg" src="" alt="">
+              <div class="snames">
+                <p class="nm"></p>
+                <p class="tm"></p>
+              </div>
+              <div class="spays">提现&nbsp;
+                <span class="py"></span>
+              </div>
+            </div>
+
+            <div class="scrli">
+              <img class="atimg" src="" alt="">
+              <div class="snames">
+                <p class="nm"></p>
+                <p class="tm"></p>
+              </div>
+              <div class="spays">提现&nbsp;
+                <span class="py"></span>
+              </div>
+            </div>
+
+            <div class="scrli">
+              <img class="atimg" src="" alt="">
+              <div class="snames">
+                <p class="nm"></p>
+                <p class="tm"></p>
+              </div>
+              <div class="spays">提现&nbsp;
+                <span class="py"></span>
+              </div>
+            </div>
+
           </div>
         </div>
-        <div data-v-1d1d5e89="" class="activeRuleBtn">
-          <!-- <p data-v-1d1d5e89="">今日已发出346773份红包</p> -->
+
+        <div class="receiveRedPacketBox sclBox2" style="display: none;">
+          <img src="img/two_bg.png" class="receiveRedPacketBj">
+          <p class="hints">24点前未领取，将退返红包池</p>
+          <p class="hotTle">恭喜获得</p>
+          <ul class="money-box">
+            <li>¥</li>
+            <li id="gtMoney"></li>
+            <li>待提现</li>
+          </ul>
+          <p class="not-msg">如多次参与领取，以最后一次金额为准</p>
+          <div class="red-btn" id="getPap">答题领取红包</div>
+          <p class="not-msg ins-msg" style="padding-top:2rem;">红包池剩余
+            <i id="stMoney"></i>元现金</p>
+          <p class="not-msg ins-msg">本活动微信认证，版权真实有效</p>
         </div>
+
       </div>
     </div>
+    
+    <div class="mask" style="display: none;">
+      <div class="infmsg-box">
+        <p class="papname"></p>
+        <p>新春微信福利，答对方可提现</p>
+        <ul id="papBox">
+          <li class="papone"></li>
+          <li class="papmsg"></li>
+        </ul>
+      </div>
+    </div>
+  <!-- 下面的JS必须放在页面最后面调用 -->
+  <script>
+    /*-----------需要PHP控制的变量--------------*/
+    var TOURL = "share.html";  // 需要跳转的地址
+    var sharePay = 0;  // 传递到分享页的金额
+
+    /*-----------本地变量--------------*/
+    var btnCai = document.querySelector(".openBtn");
+    var sclBox1 = document.querySelector(".sclBox1");
+    var sclBox2 = document.querySelector(".sclBox2");
+    var papName = document.querySelector(".papname");
+    var papOne = document.querySelector(".papone");
+    var papMsg = document.querySelector(".papmsg");
+    var maskBox = document.querySelector(".mask");
+    var papBox = document.getElementById("papBox");
+    var getPap = document.getElementById("getPap");
+    var scrollDiv = document.getElementById("scrollDiv");
+    var all_Img = document.querySelectorAll(".atimg");
+    var all_Nm = document.querySelectorAll(".nm");
+    var all_Tm = document.querySelectorAll(".tm");
+    var all_Py = document.querySelectorAll(".py");
+    var arrInx = 1;
+    var gtMoney = document.getElementById("gtMoney");
+    var stMoney = document.getElementById("stMoney");
+    /*------------定义方法区--------------*/
+    // 生产随机时间
+    function getHoursDate() {
+      var date = new Date();
+      var strDate = (Math.random() * 60).toFixed(0);
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+      }
+      var currentdate = (date.getHours() == 0 ? '00' : date.getHours() - 1) + ':' + strDate;
+      return currentdate;
+    }
+    function SetPay() {
+      var paystxt = (Math.random() * 20 + 13).toFixed(2);
+      return paystxt + "元";
+    }
+    // 随机打乱数组
+    function randomsort(a, b) {
+      return Math.random() > .5 ? -1 : 1;
+    }
+    // 执行禁止下拉
+    document.body.addEventListener('touchmove', function (evt) {
+      if (!evt._isScroller) { evt.preventDefault(); }
+    })
+    // 初始化元素
+    var SclBox = {
+      "inits": function () {
+        /*---userData是外加载json---*/
+        userData.data.sort(randomsort);
+        [0, 1, 2, 3].forEach(sem => {
+          all_Img[sem].setAttribute("src", userData.urls + userData.data[sem].avatar);
+          all_Nm[sem].innerHTML = userData.data[sem]["nick_name"];
+          all_Tm[sem].innerHTML = getHoursDate();
+          all_Py[sem].innerHTML = SetPay();
+        });
+        scrollDiv.innerHTML += scrollDiv.innerHTML;
+        /*---paperData是外加载json---*/
+        paperData.sort(randomsort);
+        papName.innerHTML = paperData[0].name;
+        papOne.innerHTML = paperData[0].one;
+        papMsg.innerHTML = paperData[0].msg;
+        sharePay = (Math.random() * 22 + 22).toFixed(2);
+        var stmoney = localStorage.getItem("STMONEY") ? localStorage.getItem("STMONEY") : 607592.75;
+        stmoney = (stmoney - sharePay).toFixed(2);
+        gtMoney.innerText = sharePay;
+        stMoney.innerText = stmoney;
+        localStorage.setItem("STMONEY", stmoney);
+      }
+    }
+    SclBox.inits();
+
+    var boxHeight = parseInt(scrollDiv.offsetHeight / 3) + 2;
+    console.log(boxHeight, 11111);
+    var changDivH = parseInt(scrollDiv.scrollHeight / 8) - 1;
+    var setDivH = parseInt(scrollDiv.scrollHeight / 2);
+    var allImg = document.querySelectorAll(".atimg");
+    var allNm = document.querySelectorAll(".nm");
+    var allTm = document.querySelectorAll(".tm");
+    var allPy = document.querySelectorAll(".py");
+    // new function () {
+    function xxx () {
+      scrollDiv.scrollTop == setDivH ? scrollDiv.scrollTop = 0 : scrollDiv.scrollTop++;
+      if (scrollDiv.scrollTop === changDivH) {
+        arrInx++;
+        arrInx = arrInx == 50 ? 0 : arrInx;
+        // console.log(scrollDiv.scrollTop, "div1,div3");
+        allImg[0].setAttribute("src", userData.urls + userData.data[arrInx].avatar);
+        allNm[0].innerHTML = userData.data[arrInx]["nick_name"];
+        allTm[0].innerHTML = getHoursDate();
+        allPy[0].innerHTML = SetPay();
+        allImg[2].setAttribute("src", userData.urls + userData.data[arrInx].avatar);
+        allNm[2].innerHTML = allNm[0].innerHTML;
+        allTm[2].innerHTML = allTm[0].innerHTML;
+        allPy[2].innerHTML = allPy[0].innerHTML;
+      }
+      if (scrollDiv.scrollTop === setDivH) {
+        // console.log(scrollDiv.scrollTop, "div2");
+        arrInx++;
+        arrInx = arrInx == 50 ? 0 : arrInx;
+        allImg[1].setAttribute("src", userData.urls + userData.data[arrInx].avatar);
+        allNm[1].innerHTML = userData.data[arrInx]["nick_name"];
+        allTm[1].innerHTML = getHoursDate();
+        allPy[1].innerHTML = SetPay();
+      }
+      setTimeout(arguments.callee, scrollDiv.scrollTop % boxHeight ? 10 : 1500);
+    };
+
+    /*---------------调用执行区--------------*/
+    // 点击按钮 >> 开
+    btnCai.addEventListener('click', function (e) {
+      btnCai.classList.add("btnActive");
+      setTimeout(() => {
+        sclBox1.setAttribute('style', 'display:none');
+        sclBox2.setAttribute('style', 'display:block');
+      }, 1010);
+    });
+    // 点击领取红包
+    getPap.addEventListener('click', function (e) {
+      maskBox.setAttribute('style', 'display:flex');
+      getPap.setAttribute('style', 'display:none');
+    });
+    // 答题按钮
+    papBox.addEventListener('click', function (e) {
+      location.href = TOURL
+    });
+  </script>
   </body>
 </html>
