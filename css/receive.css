@@ -256,6 +256,10 @@ to {
   color:#fff;
   border-bottom: 1px solid #990035;
 }
+.redDetailList .mainOuts{
+  animation: mainOut 1.9s ease both;
+  -webkit-animation: mainOut 1.9s ease both;
+}
 .redDetailList img {
     width: 2.2rem;
     height: 2.2rem;
@@ -343,13 +347,16 @@ position: absolute; left: -0.3rem; bottom: 0; border-width:0.6rem 0.7rem 0 0;
 .red-btn {
     margin: 3.4rem auto 0;
     display: block;
-    width: 16rem;
-    height: 3.4rem;
+    width: 17rem;
+    height: 5.4rem;
+    padding-bottom: 2rem;
     letter-spacing: 1px;
-    line-height: 3.4rem;
+    line-height: 4.8rem;
     text-align: center;font-size: 1.4rem;
-    color: #b8210c;font-weight: 700;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#fffd38),to(#fecc36));background-image: linear-gradient(-180deg,#fffd38,#fecc36);-webkit-box-shadow: inset 0 .1rem .075rem 0 hsla(0,0%,100%,.5),inset 0 -.1rem .075rem 0 #ff9500;box-shadow: inset 0 .1rem .075rem 0 hsla(0,0%,100%,.5),inset 0 -.1rem .075rem 0 #ff9500;border-radius: 0.5rem;-webkit-animation: dangling 1.5s infinite;animation: dangling 1.5s infinite;
+    color: #990035;font-weight: 500;
+    background:url(../img/gbtns.png) center no-repeat;
+    background-size: 100% auto;
+    -webkit-animation: dangling 1.5s infinite;animation: dangling 1.5s infinite;
     position:relative;
 	  z-index:2;
 }
@@ -380,6 +387,12 @@ position: absolute; left: -0.3rem; bottom: 0; border-width:0.6rem 0.7rem 0 0;
         -webkit-transform:scaleX(1);
         transform:scaleX(1)
     }
+}
+@-webkit-keyframes mainOut {
+  0%{opacity:1; margin-top: 0;}to{opacity:0.2; margin-top: -3.333rem;}
+}
+@keyframes mainOut {
+  0%{opacity:1; margin-top: 0;}to{opacity:0.2; margin-top: -3.333rem;}
 }
 .mask{
     display: flex;

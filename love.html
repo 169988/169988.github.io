@@ -67,21 +67,10 @@
           <div class="alreadyReceive">
             <div class="lineLeft"></div>
             <p class="personMsgBox">今日已有&nbsp;
-              <span class="personNumber">211210</span>&nbsp;人领取了现金</p>
+              <span class="personNumber"></span>&nbsp;人领取了现金</p>
             <div class="lineRight"></div>
           </div>
           <div id="scrollDiv" class="redDetailList">
-
-            <div class="scrli">
-              <img class="atimg" src="" alt="">
-              <div class="snames">
-                <p class="nm"></p>
-                <p class="tm"></p>
-              </div>
-              <div class="spays">提现&nbsp;
-                <span class="py"></span>
-              </div>
-            </div>
 
             <div class="scrli">
               <img class="atimg" src="" alt="">
@@ -130,7 +119,7 @@
           </ul>
           <p class="not-msg">如多次参与领取，以最后一次金额为准</p>
           <div class="red-btn" id="getPap">答题领取红包</div>
-          <p class="not-msg ins-msg" style="padding-top:2rem;">红包池剩余
+          <p class="not-msg ins-msg" style="padding-top:1.4rem;">红包池剩余
             <i id="stMoney"></i>元现金</p>
           <p class="not-msg ins-msg">本活动微信认证，版权真实有效</p>
         </div>
@@ -155,6 +144,7 @@
     var sharePay = 0;  // 传递到分享页的金额
 
     /*-----------本地变量--------------*/
+    var psNum = document.querySelector(".personNumber");
     var btnCai = document.querySelector(".openBtn");
     var sclBox1 = document.querySelector(".sclBox1");
     var sclBox2 = document.querySelector(".sclBox2");
@@ -169,7 +159,7 @@
     var all_Nm = document.querySelectorAll(".nm");
     var all_Tm = document.querySelectorAll(".tm");
     var all_Py = document.querySelectorAll(".py");
-    var arrInx = 1;
+    var arrInx = 2;
     var gtMoney = document.getElementById("gtMoney");
     var stMoney = document.getElementById("stMoney");
     /*------------定义方法区--------------*/
@@ -198,15 +188,20 @@
     // 初始化元素
     var SclBox = {
       "inits": function () {
+        if (localStorage.getItem("SETNUMB")) {
+          psNum.innerText = parseInt(localStorage.getItem("SETNUMB")) + parseInt((Math.random() * 100 + 60).toFixed(0));
+        } else {
+          psNum.innerText = (Math.random() * 200000 + 600).toFixed(0);
+        }
+        localStorage.setItem("SETNUMB", psNum.innerText);
         /*---userData是外加载json---*/
         userData.data.sort(randomsort);
-        [0, 1, 2, 3].forEach(sem => {
+        [0, 1, 2].forEach(sem => {
           all_Img[sem].setAttribute("src", userData.urls + userData.data[sem].avatar);
           all_Nm[sem].innerHTML = userData.data[sem]["nick_name"];
           all_Tm[sem].innerHTML = getHoursDate();
           all_Py[sem].innerHTML = SetPay();
         });
-        scrollDiv.innerHTML += scrollDiv.innerHTML;
         /*---paperData是外加载json---*/
         paperData.sort(randomsort);
         papName.innerHTML = paperData[0].name;
@@ -222,40 +217,26 @@
     }
     SclBox.inits();
 
-    var boxHeight = parseInt(scrollDiv.offsetHeight / 3) + 2;
-    console.log(boxHeight, 11111);
-    var changDivH = parseInt(scrollDiv.scrollHeight / 8) - 1;
-    var setDivH = parseInt(scrollDiv.scrollHeight / 2);
-    var allImg = document.querySelectorAll(".atimg");
-    var allNm = document.querySelectorAll(".nm");
-    var allTm = document.querySelectorAll(".tm");
-    var allPy = document.querySelectorAll(".py");
-    // new function () {
-    function xxx () {
-      scrollDiv.scrollTop == setDivH ? scrollDiv.scrollTop = 0 : scrollDiv.scrollTop++;
-      if (scrollDiv.scrollTop === changDivH) {
-        arrInx++;
-        arrInx = arrInx == 50 ? 0 : arrInx;
-        // console.log(scrollDiv.scrollTop, "div1,div3");
-        allImg[0].setAttribute("src", userData.urls + userData.data[arrInx].avatar);
-        allNm[0].innerHTML = userData.data[arrInx]["nick_name"];
-        allTm[0].innerHTML = getHoursDate();
-        allPy[0].innerHTML = SetPay();
-        allImg[2].setAttribute("src", userData.urls + userData.data[arrInx].avatar);
-        allNm[2].innerHTML = allNm[0].innerHTML;
-        allTm[2].innerHTML = allTm[0].innerHTML;
-        allPy[2].innerHTML = allPy[0].innerHTML;
-      }
-      if (scrollDiv.scrollTop === setDivH) {
-        // console.log(scrollDiv.scrollTop, "div2");
-        arrInx++;
-        arrInx = arrInx == 50 ? 0 : arrInx;
-        allImg[1].setAttribute("src", userData.urls + userData.data[arrInx].avatar);
-        allNm[1].innerHTML = userData.data[arrInx]["nick_name"];
-        allTm[1].innerHTML = getHoursDate();
-        allPy[1].innerHTML = SetPay();
-      }
-      setTimeout(arguments.callee, scrollDiv.scrollTop % boxHeight ? 10 : 1500);
+    new function () {
+      var FeaBox = document.getElementById('scrollDiv');
+      var oldDivs = FeaBox.children[0];
+      var newDivs = oldDivs.cloneNode(true);
+      var asImg = newDivs.querySelector(".atimg");
+      var asNm = newDivs.querySelector(".nm");
+      var asTm = newDivs.querySelector(".tm");
+      var asPy = newDivs.querySelector(".py");
+      arrInx++;
+      arrInx = arrInx == 50 ? 0 : arrInx;
+      asImg.setAttribute("src", userData.urls + userData.data[arrInx].avatar);
+      asNm.innerHTML = userData.data[arrInx]["nick_name"];
+      asTm.innerHTML = getHoursDate();
+      asPy.innerHTML = SetPay();
+      FeaBox.appendChild(newDivs);
+      oldDivs.className = "scrli mainOuts";
+      setTimeout(() => {
+        FeaBox.removeChild(oldDivs);
+      }, 2000);
+      setTimeout(arguments.callee, 2300);
     };
 
     /*---------------调用执行区--------------*/
@@ -264,13 +245,14 @@
       btnCai.classList.add("btnActive");
       setTimeout(() => {
         sclBox1.setAttribute('style', 'display:none');
+        scrollDiv.remove();
         sclBox2.setAttribute('style', 'display:block');
       }, 1010);
     });
     // 点击领取红包
     getPap.addEventListener('click', function (e) {
       maskBox.setAttribute('style', 'display:flex');
-      getPap.setAttribute('style', 'display:none');
+      // getPap.setAttribute('style', '');
     });
     // 答题按钮
     papBox.addEventListener('click', function (e) {
